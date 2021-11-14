@@ -1,0 +1,390 @@
+
+{
+  "info": {
+    "_postman_id": "fd269b7b-4fee-496e-975e-fe60ab500a37",
+    "name": "RESTful API UMVEL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "/auth",
+      "item": [
+        {
+          "name": "/login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "",
+                  "postman.setEnvironmentVariable(\"token\", jsonData.data);"
+                ]
+              }
+            }
+          ],
+          "id": "475404c5-4c89-4fb7-aa28-a1d7ce34810d",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "{{language}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "admin@admin.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "pass1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "{{baseUrl}}/login"
+          },
+          "response": []
+        },
+        {
+          "name": "/register",
+          "id": "b5f03d97-6ef9-483c-a874-0bd8fe97b5f5",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "{{language}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "admin3@admin.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "admin3",
+                  "type": "text"
+                },
+                {
+                  "key": "passwordConfirm",
+                  "value": "admin3",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "{{baseUrl}}/v1/auth/register"
+          },
+          "response": []
+        },
+        {
+          "name": "/change-password",
+          "id": "ba9f5001-2d8c-4898-a5b9-0701f76a6731",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "{{language}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "password",
+                  "value": "admin",
+                  "type": "text"
+                },
+                {
+                  "key": "passwordNew",
+                  "value": "admin",
+                  "type": "text"
+                },
+                {
+                  "key": "passwordConfirm",
+                  "value": "admin",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "{{baseUrl}}/change-password"
+          },
+          "response": []
+        }
+      ],
+      "id": "cfc0cfa1-c002-4280-b2f5-095e75b5ea0f"
+    },
+    {
+      "name": "/misc",
+      "item": [
+        {
+          "name": "/change-language",
+          "id": "aa7d043b-bb09-4489-b032-7675695e4694",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept-Language",
+                "type": "text",
+                "value": "sl-SI"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "language",
+                  "value": "sl-SI",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "{{baseUrl}}/misc/change-language"
+          },
+          "response": []
+        }
+      ],
+      "id": "4a17f9e8-583f-4ebf-b068-3728d42b5e4e"
+    },
+    {
+      "name": "/users",
+      "item": [
+        {
+          "name": "/",
+          "id": "76b40e07-7f11-4aca-aadb-955f8015e649",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept-Language",
+                "type": "text",
+                "value": "sl-SI"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": []
+            },
+            "url": "{{baseUrl}}/v1/users"
+          },
+          "response": []
+        },
+        {
+          "name": "/:id",
+          "id": "5fe8c9b7-08ff-4cd1-818c-bc1c47e4c477",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept-Language",
+                "type": "text",
+                "value": "sl-SI"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "{{token}}"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": []
+            },
+            "url": "{{baseUrl}}/users/3"
+          },
+          "response": []
+        },
+        {
+          "name": "/:id",
+          "id": "e111f08a-50cc-4680-830d-02ee23a78765",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept-Language",
+                "type": "text",
+                "value": "sl-SI"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "{{token}}"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": []
+            },
+            "url": "{{baseUrl}}/users/9"
+          },
+          "response": []
+        },
+        {
+          "name": "/:id",
+          "id": "84ba88df-7ec0-4967-be05-05afb980338d",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept-Language",
+                "type": "text",
+                "value": "sl-SI"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "{{token}}"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "Tyrion1",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "test name",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "{{baseUrl}}/users/5"
+          },
+          "response": []
+        }
+      ],
+      "id": "6920a7b4-a20b-4ca2-83aa-89421ff7fc12"
+    },
+    {
+      "name": "order",
+      "item": [
+        {
+          "name": "order",
+          "id": "e42c7bf9-f6d8-4651-b2b3-dc14a04afa20",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6bnVsbCwiZW1haWwiOiJhZG1pbjdAYWRtaW4uY29tIiwicm9sZSI6IkFETUlOSVNUUkFUT1IiLCJjcmVhdGVkX2F0IjoiMjAyMS0xMS0xMVQxMDowNDo0My41NzJaIiwiaWF0IjoxNjM2NjI1MTA2LCJleHAiOjE2MzY2MjYwMDZ9.uY8jrY7WeHs9G2T2Q5Pz7i3Jmvf3H4TO_pRxiPBHW58",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"vat\":\"HBH090\",\r\n    \"total\":5050,\r\n    \"token\":\"que va aqui ? \",\r\n    \"total_items\":5,\r\n    \"customer_name\":\"Ezequiel hernandez\",\r\n    \"status\":1,\r\n    \"items\":[\r\n    {\r\n        \"id\":2,\r\n        \"name\":\"nombre articulo\"\r\n    },\r\n    {\r\n        \"id\":2,\r\n        \"name\":\"nombre articulo\"\r\n    }\r\n    ]\r\n\r\n}"
+            },
+            "url": "{{baseUrl}}/v1/order/create"
+          },
+          "response": []
+        }
+      ],
+      "id": "0a0c24b7-db01-4c0c-8aae-7d267f248f0a"
+    },
+    {
+      "name": "item",
+      "item": [
+        {
+          "name": "create",
+          "id": "18706485-c6d4-4b4b-9d63-942201e0e502",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": null
+          },
+          "response": []
+        }
+      ],
+      "id": "f24a73e6-e76e-4477-aca2-3a7934aa9a41"
+    }
+  ]
+}
