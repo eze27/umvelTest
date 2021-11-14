@@ -1,11 +1,13 @@
 import { MigrationInterface, QueryRunner, getRepository } from 'typeorm';
 
 import { Role } from '../entities/users/types';
-import { User } from '../entities/users/User';
+import { User } from '../entities/users/user';
 
 export class SeedUsers1590519635401 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
     let user = new User();
+    console.log('Run Seed ');
+    
     const userRepository = getRepository(User);
 
     user.username = 'Heisenberg';

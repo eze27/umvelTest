@@ -10,10 +10,13 @@ const configSeed: ConnectionOptions = {
   database: process.env.POSTGRES_DB,
   synchronize: false,
   logging: false,
-  entities: ['src/typeorm/entities/**/*.ts'],
-  migrations: ['src/typeorm/seeds/**/*.ts'],
+  entities: ['src/typeorm/entities/**/*{.ts,.js}'],
+  migrations: ['src/typeorm/seeds/**/*.{.ts,.js}'],
+  subscribers: ['src/typeorm/subscriber/**/*{.ts,.js}'],
   cli: {
+    entitiesDir: 'src/typeorm/entities',
     migrationsDir: 'src/typeorm/seeds',
+    subscribersDir: 'src/typeorm/subscriber',
   },
   namingStrategy: new SnakeNamingStrategy(),
 };
