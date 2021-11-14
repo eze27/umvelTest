@@ -9,6 +9,8 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
+import swaggerJSDoc  from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 import './utils/response/customSuccess';
 import { errorHandler } from './middleware/errorHandler';
@@ -32,12 +34,45 @@ try {
     console.log(err);
 }
 app.use(morgan('combined'));
+const swaggerDefinition = {
+    openapi: '3.0.0',
+    info: {
+        title: 'TypeORM RESTful API Test UMVEL',
+        version: '1.0.0',
+        description:
+            'This is a REST API',
+        license: {
+            name: 'Licensed Under MIT',
+            url: 'https://spdx.org/licenses/MIT.html',
+        },
+        contact: {
+            name: 'JSONPlaceholder',
+            url: '',
+        },
+    },
+    
+    servers: [
+        {
+            url: 'http://localhost:4000',
+            description: 'Development server',
+        },
+    ],
 
+};
+const options = {
+    swaggerDefinition,
+    // Paths to files containing OpenAPI definitions
+    apis: ['./routes/v1/*.ts'],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/', routes);
 
 app.use(errorHandler);
 
 const port = process.env.PORT || 4000;
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
@@ -45,3 +80,7 @@ app.listen(port, () => {
 (async () => {
     await dbCreateConnection();
 })();
+
+
+
+

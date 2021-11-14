@@ -8,6 +8,7 @@ import { JwtPayload } from 'types/JwtPayload';
 import { createJwtToken } from 'utils/createJwtToken';
 import { CustomError } from 'utils/response/custom-error/CustomError';
 
+
 export const login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
   console.log('Login[1]');
